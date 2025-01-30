@@ -1,20 +1,9 @@
 import tensorflow as tf
 from keras import layers, models
-import pickle
 
 
 
-# Daten laden und festlegen
-with open("Daten/data_batch_1","rb") as pi:
-    data = pickle.load(pi, encoding='latin1') 
-X = data["data"]
-y = data["labels"]
-y = tf.keras.utils.to_categorical(y, num_classes=10)
-
-#Normen der Daten
-X = X / 255.0
-X = X.reshape((10000, 3, 32, 32))
-
+#Modell wird erstellt
 def erstellen():
     model = models.Sequential([
         layers.Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=(3, 32, 32)),
@@ -36,8 +25,11 @@ def erstellen():
                 metrics=['accuracy'])
     return model
 
+#modell wird trainiert
 def trainieren(modell,X,y):
-    modell.fit(X, y, epochs=10)
+    modell.fit(X, y, epochs=30)
 
-def speichern(modell):
-    modell.save()
+#modell wird anhand anderer Daten getestet
+def rate(modell,inputDaten,outputDaten):
+    test = modell.evaluate(inputDaten, outputDaten)
+    print("Test-Loss und Test-Genauigkeit:", test)
