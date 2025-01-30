@@ -7,10 +7,14 @@ from keras import layers, models
 def erstellen():
     model = models.Sequential([
         layers.Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=(32, 32,3)),
+        layers.Dropout(0.2),
         layers.MaxPooling2D((2, 2), padding='same'),
+        layers.Dropout(0.2),
 
         layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
+        layers.Dropout(0.2),
         layers.MaxPooling2D((2, 2), padding='same'),
+        layers.Dropout(0.2),
 
         layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
         layers.Flatten(),
@@ -27,7 +31,7 @@ def erstellen():
 
 #modell wird trainiert
 def trainieren(modell,X,y):
-    modell.fit(X, y, epochs=3)
+    modell.fit(X, y, epochs=10)
 
 #modell wird anhand anderer Daten getestet
 def rate(modell,inputDaten,outputDaten):

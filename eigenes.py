@@ -8,7 +8,7 @@ with open("Daten/batches.meta","rb") as pi:
     dict = pickle.load(pi, encoding='latin1')["label_names"]
     
 #öffnet das Bild und passt Größe an
-image = Image.open('Daten/schiff.webp')
+image = Image.open('Daten/reh.webp')
 image = image.resize((32,32))
 
 #wandelt das Bild in ein Array um und passt dieses an

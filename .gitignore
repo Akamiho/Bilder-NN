@@ -4,3 +4,6 @@ Include
 pyvenv.cfg
 share
 __pycache__
+*.jpg
+*.png
+*.webp
