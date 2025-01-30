@@ -10,6 +10,9 @@ def erstellen():
         layers.MaxPooling2D((2, 2), padding='same'),
 
         layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
+        layers.MaxPooling2D((2, 2), padding='same'),
+
+        layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
         layers.Flatten(),
         
         layers.Dense(64, activation='relu'),
@@ -18,13 +21,13 @@ def erstellen():
 
 
     model.compile(optimizer='adam',
-                loss='binary_crossentropy',
+                loss='categorical_crossentropy',
                 metrics=['accuracy'])
     return model
 
 #modell wird trainiert
 def trainieren(modell,X,y):
-    modell.fit(X, y, epochs=20)
+    modell.fit(X, y, epochs=3)
 
 #modell wird anhand anderer Daten getestet
 def rate(modell,inputDaten,outputDaten):
