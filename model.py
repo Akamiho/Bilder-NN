@@ -1,4 +1,3 @@
-import tensorflow as tf
 from keras import layers, models
 
 
@@ -16,11 +15,11 @@ def erstellen():
         layers.MaxPooling2D((2, 2), padding='same'),
         layers.Dropout(0.2),
 
-        layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
+        layers.Conv2D(128, (3, 3), activation='relu', padding='same'),
         layers.Flatten(),
         
-        layers.Dense(64, activation='relu'),
-        layers.Dense(10, activation='softmax') 
+        layers.Dense(256, activation='relu'),
+        layers.Dense(100, activation='softmax') 
     ])
 
 
@@ -31,7 +30,7 @@ def erstellen():
 
 #modell wird trainiert
 def trainieren(modell,X,y):
-    modell.fit(X, y, epochs=10)
+    return modell.fit(X, y, epochs=2)
 
 #modell wird anhand anderer Daten getestet
 def rate(modell,inputDaten,outputDaten):

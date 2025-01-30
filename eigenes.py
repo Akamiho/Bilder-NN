@@ -5,8 +5,8 @@ import pickle
 
 def testen(pfad):
     #öffnet die Datei mit den Namen der Kategorien
-    with open("Daten/batches.meta","rb") as pi:
-        dict = pickle.load(pi, encoding='latin1')["label_names"]
+    with open("Daten/meta","rb") as pi:
+        dict = pickle.load(pi, encoding='latin1')["fine_label_names"]
         
     #öffnet das Bild und passt Größe an
     image = Image.open(pfad)
@@ -25,4 +25,4 @@ def testen(pfad):
     ergebnis = dict[ergebnis.argmax()]
     print("Das Bild ist mit einer Warscheinlichkeit von", prob,"% :",ergebnis,"!")
 
-testen("Daten/cat.jpg")
+testen("Daten/truck.jpg")

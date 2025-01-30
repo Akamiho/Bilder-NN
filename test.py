@@ -1,16 +1,6 @@
 import pickle
-import laden
-import numpy as np
-import matplotlib.pyplot as plt
-import show
 
-
-bilder = laden.train()[0]
-bild = bilder[0]
-
-
-
-plt.imshow(bild)
-plt.show()
-
-show.image(1,0)
+with open("Daten/meta","rb") as pi:
+    dict = pickle.load(pi, encoding='latin1')["coarse_label_names"]
+    
+print(dict)
