@@ -1,6 +1,10 @@
 import tensorflow as tf
 import pickle 
 import numpy as np
+import pandas as pd
+
+with open("Daten/batches.meta","rb") as pi:
+    dict = pickle.load(pi, encoding='latin1')["label_names"]
 
 def train():
     y = []
@@ -15,21 +19,23 @@ def train():
     #Daten werden für das Modell angepasst(zu Numpy Array mit richtigen Dimensionen und normalisiert)
     X = np.array(X)
     X = X / 255.0
-    X = X.reshape((50000, 3, 32, 32))
+    X = X.reshape((50000, 32, 32, 3))
+    
     # Output-Daten werden zu Array umgewandelt, dass Warscheinlichkeiten zeigt
-    y = tf.keras.utils.to_categorical(y, num_classes=10)
+    y = pd.get_dummies(data=y,columns=dict,dtype=int).to_numpy()
     
     return [X,y]
 
 def test():
-    #test-Daten werden geladen
+    
+    #Test-Daten werden geladen
     with open("Daten/test_batch","rb") as pi:
         data = pickle.load(pi, encoding='latin1') 
     
     #Test-Daten werden angepasst
     X = data["data"] / 255
-    X = X.reshape((10000, 3, 32, 32))
-    y = tf.keras.utils.to_categorical(data["labels"], num_classes=10)
+    X = X.reshape((10000, 32, 32, 3))
+    y = pd.get_dummies(data=data["labels"],columns=dict,dtype=int).to_numpy()
     
     return [X,y]
 

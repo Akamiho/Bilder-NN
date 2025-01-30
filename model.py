@@ -6,10 +6,7 @@ from keras import layers, models
 #Modell wird erstellt
 def erstellen():
     model = models.Sequential([
-        layers.Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=(3, 32, 32)),
-        layers.MaxPooling2D((2, 2), padding='same'),
-
-        layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
+        layers.Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=(32, 32,3)),
         layers.MaxPooling2D((2, 2), padding='same'),
 
         layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
@@ -21,13 +18,13 @@ def erstellen():
 
 
     model.compile(optimizer='adam',
-                loss='categorical_crossentropy',
+                loss='binary_crossentropy',
                 metrics=['accuracy'])
     return model
 
 #modell wird trainiert
 def trainieren(modell,X,y):
-    modell.fit(X, y, epochs=30)
+    modell.fit(X, y, epochs=20)
 
 #modell wird anhand anderer Daten getestet
 def rate(modell,inputDaten,outputDaten):
