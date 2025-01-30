@@ -2,5 +2,5 @@ Lib
 Scripts
 Include
 pyvenv.cfg
-Daten
 share
+__pycache__
