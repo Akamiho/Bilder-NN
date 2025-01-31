@@ -8,18 +8,8 @@ def train():
     #jede der Dateien wird geladen und zu zwei Listen zusammengefasst
     with open("Daten/train","rb") as pi:
         data = pickle.load(pi, encoding='latin1') 
-    
-    X = data["data"]
-    y = data["fine_labels"]
-    #Daten werden für das Modell angepasst(zu Numpy Array mit richtigen Dimensionen und normalisiert)
-    X = X / 255.0
-    X = X.reshape((50000, 3, 32, 32))
-    X = X.transpose(0, 2, 3, 1)
-    
-    # Output-Daten werden zu Array umgewandelt, dass Warscheinlichkeiten zeigt
-    y = pd.get_dummies(data=y,columns=dict,dtype=int).to_numpy()
-    
-    return [X,y]
+
+    return anpassen(data["data"],data["fine_labels"])
 
 def test():
     
@@ -28,10 +18,14 @@ def test():
         data = pickle.load(pi, encoding='latin1') 
     
     #Test-Daten werden angepasst
-    X = data["data"] / 255.0
-    X = X.reshape((10000, 3, 32, 32))
+    return anpassen(data["data"],data["fine_labels"])
+
+
+#Funktion normalisiert Input, bringt in ins richige Format und macht den Output zu Kategorischen Daten
+def anpassen(I,O):
+    X = I / 255.0
+    X = X.reshape((len(X), 3, 32, 32))
     X = X.transpose(0, 2, 3, 1)
-    y = pd.get_dummies(data=data["fine_labels"],columns=dict,dtype=int).to_numpy()
+    y = pd.get_dummies(O,columns=dict,dtype=int).to_numpy()
     
     return [X,y]
-
