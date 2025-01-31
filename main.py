@@ -1,12 +1,17 @@
 import model
 import laden
+import plotter
 
 modell = model.erstellen()
 
 traindaten = laden.train()
+testdaten = laden.test()
 
-model.trainieren(modell,traindaten[0],traindaten[1])
+training = model.trainieren(modell,traindaten,testdaten)
 modell.save("Daten/modell.keras")
 
-testdaten = laden.test()
-model.rate(modell,testdaten[0],testdaten[1])
+plotter.plotAccuracy(training)
+plotter.plotLoss(training)
+
+
+model.rate(modell,testdaten)
