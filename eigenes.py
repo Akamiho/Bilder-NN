@@ -25,4 +25,4 @@ def testen(pfad):
     ergebnis = dict[ergebnis.argmax()]
     print("Das Bild ist mit einer Warscheinlichkeit von", prob,"% :",ergebnis,"!")
 
-testen("Daten/cat.jpg")
+testen("Daten/cat2.jpg")
