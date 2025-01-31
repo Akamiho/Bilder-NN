@@ -29,10 +29,10 @@ def erstellen():
     return model
 
 #modell wird trainiert
-def trainieren(modell,X,y):
-    return modell.fit(X, y, epochs=2)
+def trainieren(modell,X,y,test):
+    return modell.fit(X, y, epochs=7, validation_data=test )
 
 #modell wird anhand anderer Daten getestet
 def rate(modell,inputDaten,outputDaten):
     test = modell.evaluate(inputDaten, outputDaten)
-    print("Test-Loss und Test-Genauigkeit:", test)
+    print("Loss und Genauigkeit:", test)

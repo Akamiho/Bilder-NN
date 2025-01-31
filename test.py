@@ -1,6 +1,11 @@
-import pickle
+import keras
+import model
+import laden
 
-with open("Daten/meta","rb") as pi:
-    dict = pickle.load(pi, encoding='latin1')["coarse_label_names"]
-    
-print(dict)
+modell = keras.models.load_model("Daten/modell.keras")
+
+traindaten = laden.train()
+testdaten = laden.test()
+
+model.rate(modell,traindaten[0],traindaten[1])
+model.rate(modell,testdaten[0],testdaten[1])
